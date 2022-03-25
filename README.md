@@ -91,7 +91,8 @@ Script env vars:
       ✔ increases minter balance by 1
       ✔ sends funds to fundRecipient
       ✔ mints tokenID to minter
-      ✔ mints VIP/KOLs tokenID to minter
+      When minter mints VIP/KOLs tokenID
+        ✔ Must be reverted ZBZ: Invalid tokenID, this tokenID is reserved
       when preSaleRoot exists
         when valid proof
           ✔ mints tokenID to minter
