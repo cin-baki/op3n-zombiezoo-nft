@@ -344,9 +344,12 @@ describe("ZombiezooNFT contract", function () {
       expect(await contract.ownerOf(81)).to.equal(addrs[1].address);
     });
 
-    it("mints VIP/KOLs tokenID to minter", async function () {
+    describe("When minter mints VIP/KOLs tokenID", function () {
+      it("Must be reverted ZBZ: Invalid tokenID, this tokenID is reserved", async function () {
       await expect(mintCaller(addrs[1],79)).to.be.revertedWith("ZBZ: Invalid tokenID, this tokenID is reserved");
+      });
     });
+    
 
     describe("when preSaleRoot exists", function () {
       let minter: any;
