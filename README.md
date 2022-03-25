@@ -1,6 +1,6 @@
-# NeighborheadzNFT smart contract
+# ZombiezoFT smart contract
 
-Website: https://neighborheadz.op3n.world/
+Website: T.B.D
 
 Mint site: T.B.D
 
@@ -24,7 +24,7 @@ Script env vars:
 **Command**
 1. Set env vars
 2. Deploy contract: `hh run scripts/deploy.ts --network <network>`
-3. Verify contract: `hh verify <contract_address> --contract contracts/NeighborheadzNFT.sol:NeighborheadzNFT --network <network>`
+3. Verify contract: `hh verify <contract_address> --contract contracts/Zombiezoo.sol:NFT --network <network>`
 
 # Testing
 
@@ -33,81 +33,86 @@ Script env vars:
 
 ## Test cases
   ```
-    NeighborheadzNFT contract
-      #initialize
-        ✔ sets name is Neighborheadz
-        ✔ sets symbol is NBHZ
-        ✔ sets UNIT_PRICE is 0.1 eth
-        ✔ sets MAX_PRESALE_PER_MINTER is 2
-        ✔ sets owner is deployer
-        ✔ sets owner is verifier
-        ✔ grants owner is Admin
-      #supportsInterface(bytes4 interfaceId) external view returns (bool)
-        when supports ERC721 - Non-Fungible Token Standard
-          ✔ returns true
-        when supports ERC721Metadata - Non-Fungible Token Standard metadata extension
-          ✔ returns true
-        when supports EIP2981 - NFT Royalty Standard
-          ✔ returns true
-      #transferOwnership(address newOwner) external onlyOwner
-        ✔ sets new owner for contract
-        when caller is not owner
-          ✔ reverts with Ownable:
-      #setVerifier(address verifier_) external onlyAdmin
-        ✔ sets verifier
-        when caller is not admin
-          ✔ reverts with AccessControl:
-      #revokeVerifier(address verifier_) external onlyAdmin
-        ✔ revokes verifier
-        when caller is not admin
-          ✔ reverts with AccessControl:
-      #activate(uint256 startIndex_, uint256 totalSupply_, string memory tokenURI_, address fundRecipient_) external onlyAdmin
-        when caller is admin
-          ✔ sets startIndex is 80
-          ✔ sets totalSupply is 5555
-          ✔ sets baseURI is https://nft.uri
-          ✔ sets fundRecipient
-          ✔ sets tokenIndex is 80
-          ✔ sets royaltyInfo is fundRecipient and 10%
-          when already activated
-            ✔ reverts with NBHZ: Already activated
-        when caller is not admin
-          ✔ reverts with AccessControl:
-      #mintTo(address toAddress, uint256 tokenId) external onlyAdmin
-        ✔ mints tokenID to toAddress
-        ✔ increases toAddress balance by 1
-        when tokenId already minted
-          ✔ reverts with ERC721: token already minted
-        when tokenId is 0
-          ✔ reverts with NBHZ: Invalid tokenId
-        when tokenId is greater than startIndex
-          ✔ reverts with NBHZ: Invalid tokenId
-        when caller is not admin
-          ✔ reverts with AccessControl:
-      #mint(uint256 salt, bytes memory sig) external nonReentrant payable
-        ✔ marks sig is finalized
-        ✔ increases tokenIndex by 1
-        ✔ sets right tokenURI minter balance
-        ✔ increases minter balance by 1
-        ✔ sends funds to fundRecipient
-        ✔ mints tokenID to minter
-        when preSaleRoot exists
-          when valid proof
-            ✔ mints tokenID to minter
-            when minted is greater than MAX_PRESALE_PER_MINTER(is 2)
-              ✔ reverts NBHZ: Can not mint
-          when proof is empty
-            ✔ reverts NBHZ: Can not mint
-          when invalid proof
-            ✔ reverts NBHZ: Can not mint
-          when set preSaleRoot is empty
-            ✔ when call mint with empty proof, mints tokenID to minter
-        when value is less than UNIT_PRICE
-          ✔ reverts NBHZ: Invalid amount
-        when tokens reach limit total supply
-          ✔ reverts NBHZ: Reach total supply (115ms)
-        when sig used
-          ✔ reverts NBHZ: Salt Used
-        when sig recover is not a verifier
-          ✔ reverts NBHZ: Unauthorized
+     ZombiezooNFT contract
+    #initialize
+      ✔ sets name is Zombiezoo
+      ✔ sets symbol is ZBZ
+      ✔ sets UNIT_PRICE is 0.8 eth
+      ✔ sets MAX_PRESALE_PER_MINTER is 2
+      ✔ sets owner is deployer
+      ✔ sets owner is verifier
+      ✔ grants owner is Admin
+    #supportsInterface(bytes4 interfaceId) external view returns (bool)
+      when supports ERC721 - Non-Fungible Token Standard
+        ✔ returns true
+      when supports ERC721Metadata - Non-Fungible Token Standard metadata extension
+        ✔ returns true
+      when supports EIP2981 - NFT Royalty Standard
+        ✔ returns true
+    #transferOwnership(address newOwner) external onlyOwner
+      ✔ sets new owner for contract
+      when caller is not owner
+        ✔ reverts with Ownable:
+    #setVerifier(address verifier_) external onlyAdmin
+      ✔ sets verifier
+      when caller is not admin
+        ✔ reverts with AccessControl:
+    #revokeVerifier(address verifier_) external onlyAdmin
+      ✔ revokes verifier
+      when caller is not admin
+        ✔ reverts with AccessControl:
+    #activate(uint256 startIndex_, uint256 totalSupply_, string memory tokenURI_, address fundRecipient_) external onlyAdmin
+      when caller is admin
+        ✔ sets startIndex for token ID is 50, and can mint from token ID 51
+        ✔ sets totalSupply is 1000
+        ✔ sets baseURI is https://nft.uri
+        ✔ sets fundRecipient
+        ✔ sets tokenIndex is 50
+        ✔ sets royaltyInfo is fundRecipient and 10%
+        when already activated
+          ✔ reverts with ZBZ: Already activated
+      when caller is not admin
+        ✔ reverts with AccessControl:
+    #mintTo(address toAddress, uint256 tokenId) external onlyAdmin
+      ✔ mints tokenID to toAddress
+      ✔ increases toAddress balance by 1
+      when tokenId already minted
+        ✔ reverts with ERC721: token already minted
+      when tokenId is 0
+        ✔ reverts with ZBZ: Invalid tokenId
+      when tokenId is greater than startIndex
+        ✔ reverts with ZBZ: Invalid tokenId
+      when caller is not admin
+        ✔ reverts with AccessControl:
+    #mint(uint256 salt, bytes memory sig) external nonReentrant payable
+      ✔ marks sig is finalized
+      ✔ increases tokenIndex by 1
+      ✔ sets right tokenURI minter balance
+      ✔ increases minter balance by 1
+      ✔ sends funds to fundRecipient
+      ✔ mints tokenID to minter
+      ✔ mints VIP/KOLs tokenID to minter
+      when preSaleRoot exists
+        when valid proof
+          ✔ mints tokenID to minter
+          when minted is greater than MAX_PRESALE_PER_MINTER(is 2)
+            ✔ reverts ZBZ: Can not mint
+        when proof is empty
+          ✔ reverts ZBZ: Can not mint
+        when invalid proof
+          ✔ reverts ZBZ: Can not mint
+        when set preSaleRoot is empty
+          ✔ when call mint with empty proof, mints tokenID to minter
+      when value is less than UNIT_PRICE
+        ✔ reverts ZBZ: Invalid amount
+      when minter mint a not exits tokenID
+        ✔ reverts ZBZ: Reach total supply (105ms)
+      when sig used
+        ✔ reverts ZBZ: Salt Used
+      when sig recover is not a verifier
+        ✔ reverts ZBZ: Unauthorized
+
+
+  46 passing (3s)
+
   ```
